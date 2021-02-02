@@ -1,3 +1,4 @@
+//匹配左括号，是左括号那么入栈，如果不是，那么判断是否和栈顶的左括号匹配，不匹配，说明不是有效的符号
 ```
 var isValid = function(s) {
 if (s.length % 2 === 1) return false;
