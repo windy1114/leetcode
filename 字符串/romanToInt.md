@@ -19,7 +19,7 @@ X可以放在L(50) 和C(100) 的左边，来表示 40 和90。
 C可以放在D(500) 和M(1000) 的左边，来表示400 和900。
 给定一个罗马数字，将其转换成整数。输入确保在 1到 3999 的范围内。
 
-### 解题思路
+### 解题思路一 映射表
 - 1. 将所有可能出现的字符对，映射到为键值对
 - 2. 如何长度为1， 那么直接输出对应的值
 - 3. 遍历字符串：
@@ -69,4 +69,63 @@ var romanToInt = function(s) {
     }
     return result
   };
+```
+### 解题思路二 非映射表
+直接匹配
+```JavaScript
+var romanToInt = s => {
+      let result = 0
+      for(let i = 0; i < s.length; i++) {
+        switch(s[i]) {
+          case 'I':
+            if (s[i+1] === 'V') {
+              result += 4
+              i += 1
+            } else if (s[i+1] === 'X') {
+              result += 9
+              i += 1
+            } else {
+              result += 1
+            }
+            break;
+          case 'V':
+            result += 5
+            break;
+          case 'X':
+            if (s[i+1] === 'L') {
+              result += 40
+              i += 1
+            } else if (s[i+1] === 'C') {
+              result = result + 90
+              i += 1
+            } else {
+              result  += 10
+            }
+            break;
+          case 'L':
+            result += 50
+            break;
+          case 'C':
+            if (s[i+1] === 'D') {
+              result += 400
+              i += 1
+            } else if (s[i+1] === 'M') {
+              result += 900
+              i += 1
+            } else {
+              result += 100
+            }
+            break;
+          case 'D':
+            result += 500
+            break;
+          case 'M':
+            result += 1000
+            break;
+        }
+        
+      }
+      console.log(result)
+      return result;
+    }
 ```
